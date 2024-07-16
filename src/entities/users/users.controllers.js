@@ -72,3 +72,21 @@ export const login = async (req, res) => {
         })
     }
 }
+
+//GET
+export const getAllUsers = async (req, res) => {
+	try {
+        const users = await User.find({}, 'email');
+		res.status(200).json({
+			success: true,
+			message: 'Users retrived successfully',
+			data: users,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			message: 'Error retrievening users',
+			error: error.message
+		});
+	}
+};
