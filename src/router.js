@@ -5,6 +5,6 @@ import { router as postsRoutes } from './entities/posts/posts.routes.js'
 const router = Router()
 
 router.use('/users', usersRoutes)
-router.use('/post', postsRoutes)
+router.use('/posts', postsRoutes)
 
 export default router

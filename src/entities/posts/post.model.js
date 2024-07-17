@@ -2,24 +2,20 @@ import { Schema, model } from 'mongoose';
 
 const PostSchema = new Schema(
     {
-        image: {
-            type: String,
-            required: false,
-        },
         description: {
             type: String,
             required: true,
         },
-        user: {
-            type: Schema.Typers.ObjectId,
+        userId: {
+            type: Schema.Types.ObjectId,
             ref: 'User',
             required: true,
         },
-        like: {
+        like: [{
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: false,
-        },
+        }],
     },
     {
         timestamps: true,
