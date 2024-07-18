@@ -77,3 +77,33 @@ export const deletePost = async (req, res) => {
         })
     }
 }
+
+//UPDATE
+export const updatePostById = async (req, res) => {
+    try {
+        const postIdToUpdate = req.params.id; 
+        const { description } = req.body;
+        const post = await Post.findByIdAndUpdate(
+            postIdToUpdate,
+            { description: description },
+            { new: true } 
+        );
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: 'Post not found',
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: 'Post updated successfully',
+            data: post, 
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Post cannot be updated',
+            error: error.message,
+        });
+    }
+};
