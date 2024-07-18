@@ -118,34 +118,22 @@ export const updatePostById = async (req, res) => {
 export const getPostUser = async (req, res) => {
     try {
         const userId = req.tokenData.id;
-        const posts = await Post.find(
-            {
-
-                where:
-                {
-                    id: userId
-                },
-
-            }
-
-        );
-        res.status(200).json(
-            {
-                success: true,
-                message: "post retrived successfully",
-                data: posts
-            }
-        )
+        const posts = await Post.find({
+            userId: userId
+        });
+        res.status(200).json({
+            success: true,
+            message: "Posts retrieved successfully",
+            data: posts
+        });
     } catch (error) {
-        res.status(500).json(
-            {
-                susscess: false,
-                message: "error retrieving user posts",
-                error: error
-            }
-        )
+        res.status(500).json({
+            success: false,
+            message: "Error retrieving user posts",
+            error: error.message
+        });
     }
-}
+};
 
 //GET
 export const getAllPost = async (req, res) => {
