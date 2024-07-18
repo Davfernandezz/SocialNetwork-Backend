@@ -147,3 +147,20 @@ export const getPostUser = async (req, res) => {
     }
 }
 
+//GET
+export const getAllPost = async (req, res) => {
+    try {
+        const posts = await Post.find({}, 'description');
+        res.status(200).json({
+            success: true,
+            message: 'Posts retrived successfully',
+            data: posts,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error retrievening posts',
+            error: error.message
+        });
+    }
+};
