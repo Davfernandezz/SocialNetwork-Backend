@@ -56,6 +56,12 @@ export const updateUserProfile = async (req, res) => {
                 Message: "Not column updated",
             })
         }
+        if (password.length < 8 || password.length > 15) {
+            return res.status(400).json({
+                success: false,
+                message: "Password is not valid, 8 to 15 charachters must be needed",
+            })
+        }
         if (password) {
             hashedPassword = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS))
         }
@@ -65,7 +71,6 @@ export const updateUserProfile = async (req, res) => {
                 email: email,
                 password: hashedPassword
             })
-
         return res.status(200).json({
             success: true,
             Message: "User profile updated",

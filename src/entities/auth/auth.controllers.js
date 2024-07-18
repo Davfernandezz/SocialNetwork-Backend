@@ -6,9 +6,19 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
     try {
         const { email, password } = req.body
-
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Email and Password are needed",
+            })
+        }
+        if (password.length < 8 || password.length > 15) {
+            return res.status(400).json({
+                success: false,
+                message: "Password is not valid, 8 to 15 charachters must be needed",
+            })
+        }
         const hashedPassword = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS))
-
         const newUser = await User.create({
             email: email,
             password: hashedPassword
