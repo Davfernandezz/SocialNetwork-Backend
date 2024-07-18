@@ -3,20 +3,20 @@ import User from "./user.model.js";
 
 //GET
 export const getAllUsers = async (req, res) => {
-	try {
+    try {
         const users = await User.find({}, 'email');
-		res.status(200).json({
-			success: true,
-			message: 'Users retrived successfully',
-			data: users,
-		});
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			message: 'Error retrievening users',
-			error: error.message
-		});
-	}
+        res.status(200).json({
+            success: true,
+            message: 'Users retrived successfully',
+            data: users,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error retrievening users',
+            error: error.message
+        });
+    }
 };
 
 //GET
@@ -47,20 +47,30 @@ export const getUserProfile = async (req, res) => {
 //PUT
 export const updateUserProfile = async (req, res) => {
     try {
-        const userIdToUpdate = req.params.id;
-        const body = req.body;
-        const user = await User.findByIdAndUpdate(userIdToUpdate, body, { new: true });
-        if (!user) {
-            return res.status(404).json({
+        const userId = req.tokenData.id
+        const { name, email, password } = req.body
+        let hashedPassword
+        if (!name && !email && !password) {
+            return res.status(400).json({
                 success: false,
-                message: 'User not found',
-            });
+                Message: "Not column updated",
+            })
         }
-        res.status(200).json({
+        if (password) {
+            hashedPassword = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS))
+        }
+        const userProfileUpdate = await User.findOneAndUpdate({ _id: userId },
+            {
+                name: name,
+                email: email,
+                password: hashedPassword
+            })
+
+        return res.status(200).json({
             success: true,
-            message: 'User profile updated',
-            data: user,
-        });
+            Message: "User profile updated",
+            data: userProfileUpdate
+        })
     } catch (error) {
         res.status(500).json({
             success: false,

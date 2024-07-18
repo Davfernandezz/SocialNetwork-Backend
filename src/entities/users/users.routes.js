@@ -7,6 +7,6 @@ const router = Router()
 
 router.get('/',auth ,isAdmin , getAllUsers)
 router.get('/profile',auth , getUserProfile)
-router.put('/profile/:id',auth , updateUserProfile)
+router.put('/profile',auth , updateUserProfile)
 
 export {router}
