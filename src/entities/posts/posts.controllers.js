@@ -83,6 +83,12 @@ export const updatePostById = async (req, res) => {
     try {
         const postIdToUpdate = req.params.id; 
         const { description } = req.body;
+        if (!description) {
+            return res.status(400).json({
+                success: false,
+                Message: "Enter the corresponding data",
+            })
+        }
         const post = await Post.findByIdAndUpdate(
             postIdToUpdate,
             { description: description },
@@ -96,14 +102,16 @@ export const updatePostById = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-            message: 'Post updated successfully',
+            message: 'Post updated',
             data: post, 
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Post cannot be updated',
+            message: 'Error updating post',
             error: error.message,
         });
     }
 };
+
+

@@ -53,7 +53,7 @@ export const updateUserProfile = async (req, res) => {
         if (!name && !email && !password) {
             return res.status(400).json({
                 success: false,
-                Message: "Not column updated",
+                Message: "Enter the corresponding data",
             })
         }
         if (password.length < 8 || password.length > 15) {
