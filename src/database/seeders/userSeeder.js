@@ -83,3 +83,4 @@ export const userSeeder = async () => {
 		await mongoose.connection.close()
 	}
 }
+export default userSeeder
