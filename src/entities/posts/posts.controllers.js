@@ -138,7 +138,7 @@ export const getPostUser = async (req, res) => {
 //GET
 export const getAllPost = async (req, res) => {
     try {
-        const posts = await Post.find({}, 'description');
+        const posts = await Post.find({}, 'description like');
         res.status(200).json({
             success: true,
             message: 'Posts retrived successfully',
