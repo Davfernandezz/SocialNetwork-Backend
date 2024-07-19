@@ -1,5 +1,5 @@
-import postSeeder from "./postSeeder";
-import userSeeder from "./userSeeder";
+import postSeeder from "./postSeeder.js";
+import userSeeder from "./userSeeder.js";
 
 (async () => {
   console.log("Starting seeders...");
