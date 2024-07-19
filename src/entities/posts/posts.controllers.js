@@ -44,7 +44,7 @@ export const createPost = async (req, res) => {
             }
         )
     }
-}
+};
 
 //DELETE
 export const deletePost = async (req, res) => {
@@ -76,7 +76,7 @@ export const deletePost = async (req, res) => {
             error: error.message
         })
     }
-}
+};
 
 //UPDATE
 export const updatePostById = async (req, res) => {
@@ -147,7 +147,7 @@ export const getAllPost = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Error retrievening posts',
+            message: 'Error retrievening all posts',
             error: error.message
         });
     }
@@ -177,8 +177,33 @@ export const getPostdById  = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error retrieving post",
+      message: "Error retrieving post by id",
       error: error.message,
     });
   }
+};
+
+//GET
+export const getPostUserById  = async (req, res) =>{
+    try {
+        const userId = req.params.id;
+        const posts = await Post.find({ userId: userId });
+        if (posts.length === 0) {
+          return res.status(404).json({
+            success: false,
+            message: "User without posts",
+          });
+        }
+        res.status(201).json({
+          success: true,
+          message: "Posts retrieved successfully",
+          data: posts,
+        });
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          message: "Error when retrieving posts from a user",
+          error: error.message,
+        });
+      }
 };
