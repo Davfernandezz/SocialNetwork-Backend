@@ -206,3 +206,51 @@ export const getPostUserById = async (req, res) => {
         });
     }
 };
+
+//PUT
+export const putLikeById = async (req, res) => {
+    try {
+        const postId = req.params.id
+        const userId = req.tokenData.id
+        const post = await Post.findById(postId)
+        if (!post) {
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "Like post not found"
+                }
+            )
+        }
+        if (!post.like.includes(userId)) {
+            post.like.push(userId)
+            await post.save()
+            return res.json({
+                success: true,
+                message: "Like added",
+            })
+        }
+        await Post.findByIdAndUpdate(
+            postId,
+            {
+                $pull: {
+                    like: userId
+                }
+            },
+            {
+                new: true
+            }
+        )
+        res.json({
+            success: true,
+            message: "Like removed",
+        })
+    } catch (error) {
+        res.status(500).json(
+            {
+                succes: false,
+                message: "Error adding like to the post",
+                error: error.message
+            }
+        )
+    }
+}
