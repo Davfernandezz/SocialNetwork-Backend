@@ -12,4 +12,4 @@ router.get('/', auth, getAllPost)
 router.get('/:id', auth, getPostdById)
 router.get('/user/:id', auth, getPostUserById)
 
-export {router}
+export { router }

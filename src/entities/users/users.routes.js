@@ -5,8 +5,8 @@ import { isAdmin } from "../../middlewares/isAdmin.js";
 
 const router = Router()
 
-router.get('/',auth ,isAdmin , getAllUsers)
-router.get('/profile',auth , getUserProfile)
-router.put('/profile',auth , updateUserProfile)
+router.get('/', auth, isAdmin, getAllUsers)
+router.get('/profile', auth, getUserProfile)
+router.put('/profile', auth, updateUserProfile)
 
-export {router}
+export { router }

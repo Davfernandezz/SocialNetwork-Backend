@@ -49,8 +49,8 @@ export const createPost = async (req, res) => {
 //DELETE
 export const deletePost = async (req, res) => {
     try {
-        const idPost = req.params.id
-        const idToDeleteValid = Types.ObjectId.isValid(idPost)
+        const postId = req.params.id
+        const idToDeleteValid = Types.ObjectId.isValid(postId)
 
         if (!idToDeleteValid) {
             return res.status(400).json({
@@ -58,7 +58,7 @@ export const deletePost = async (req, res) => {
                 message: "Id not valid"
             })
         }
-        const deletedPost = await Post.findByIdAndDelete(idPost)
+        const deletedPost = await Post.findByIdAndDelete(postId)
         if (!deletedPost) {
             return res.status(404).json({
                 succes: false,
@@ -81,7 +81,7 @@ export const deletePost = async (req, res) => {
 //UPDATE
 export const updatePostById = async (req, res) => {
     try {
-        const postIdToUpdate = req.params.id; 
+        const postIdToUpdate = req.params.id;
         const { description } = req.body;
         if (!description) {
             return res.status(400).json({
@@ -92,7 +92,7 @@ export const updatePostById = async (req, res) => {
         const post = await Post.findByIdAndUpdate(
             postIdToUpdate,
             { description: description },
-            { new: true } 
+            { new: true }
         );
         if (!post) {
             return res.status(404).json({
@@ -103,7 +103,7 @@ export const updatePostById = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'Post updated',
-            data: post, 
+            data: post,
         });
     } catch (error) {
         res.status(500).json({
@@ -154,56 +154,55 @@ export const getAllPost = async (req, res) => {
 };
 
 //GET
-export const getPostdById  = async (req, res) => {
+export const getPostdById = async (req, res) => {
     try {
         const postId = req.params.id;
-
-    const post = await Post.findOne(
-        {
-            _id: postId
+        const post = await Post.findOne(
+            {
+                _id: postId
+            }
+        )
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: "Post not found",
+            });
         }
-    )
-    if (!post) {
-      return res.status(404).json({
-        success: false,
-        message: "Post not found",
-      });
+        res.status(200).json({
+            success: true,
+            message: "Post retrieved successfully",
+            data: post,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error retrieving post by id",
+            error: error.message,
+        });
     }
-    res.status(200).json({
-      success: true,
-      message: "Post retrieved successfully",
-      data: post,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error retrieving post by id",
-      error: error.message,
-    });
-  }
 };
 
 //GET
-export const getPostUserById  = async (req, res) =>{
+export const getPostUserById = async (req, res) => {
     try {
-        const userId = req.params.id;
-        const posts = await Post.find({ userId: userId });
+        const postId = req.params.id;
+        const posts = await Post.find({ userId: postId });
         if (posts.length === 0) {
-          return res.status(404).json({
-            success: false,
-            message: "User without posts",
-          });
+            return res.status(404).json({
+                success: false,
+                message: "User without posts",
+            });
         }
         res.status(201).json({
-          success: true,
-          message: "Posts retrieved successfully",
-          data: posts,
+            success: true,
+            message: "Posts retrieved successfully",
+            data: posts,
         });
-      } catch (error) {
+    } catch (error) {
         res.status(500).json({
-          success: false,
-          message: "Error when retrieving posts from a user",
-          error: error.message,
+            success: false,
+            message: "Error when retrieving posts from a user",
+            error: error.message,
         });
-      }
+    }
 };
