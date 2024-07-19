@@ -152,3 +152,33 @@ export const getAllPost = async (req, res) => {
         });
     }
 };
+
+//GET
+export const getPostdById  = async (req, res) => {
+    try {
+        const postId = req.params.id;
+
+    const post = await Post.findOne(
+        {
+            _id: postId
+        }
+    )
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Post retrieved successfully",
+      data: post,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error retrieving post",
+      error: error.message,
+    });
+  }
+};
