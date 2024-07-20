@@ -1,6 +1,7 @@
 import express from 'express';
 import 'dotenv/config'
 import { dbConnection } from './database/db.js';
+import router from './router.js';
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.get('/healthy', (req, res) => {
         message: "Server is healthy!"
     });
 });
+
+app.use('/api', router)
 
 dbConnection()
     .then(() => {
