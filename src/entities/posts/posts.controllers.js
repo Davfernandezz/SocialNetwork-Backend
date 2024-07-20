@@ -81,38 +81,56 @@ export const deletePost = async (req, res) => {
 //UPDATE
 export const updatePostById = async (req, res) => {
     try {
-        const postIdToUpdate = req.params.id;
-        const { description } = req.body;
+        const Role = req.tokenData.role
+        const userId = req.tokenData.id
+        const postId = req.params.id
+        const { description } = req.body
+
         if (!description) {
-            return res.status(400).json({
-                success: false,
-                Message: "Enter the corresponding data",
-            })
-        }
-        const post = await Post.findByIdAndUpdate(
-            postIdToUpdate,
-            { description: description },
-            { new: true }
-        );
-        if (!post) {
             return res.status(404).json({
                 success: false,
-                message: 'Post not found',
-            });
+                message: "Enter the corresponding data",
+            })
         }
-        res.status(200).json({
+        if (Role !== "user") {
+            const postUpdated = await Post.findByIdAndUpdate({ _id: postId }, {
+                description: description,
+            })
+            if (!postUpdated) {
+                return res.status(404).json({
+                    success: false,
+                    Message: "Post not found",
+                })
+            }
+            return res.status(200).json({
+                success: true,
+                Message: "Post updated successfully",
+            })
+        }
+        const postUpdated = await Post.findOneAndUpdate({
+            _id: postId,
+            user: userId
+        }, {
+            description: description,
+        })
+        if (!postUpdated) {
+            return res.status(404).json({
+                success: false,
+                Message: "No post with that Id or is not your post",
+            })
+        }
+        return res.status(200).json({
             success: true,
-            message: 'Post updated',
-            data: post,
-        });
+            message: "Post updated successfully",
+        })
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
-            message: 'Error updating post',
-            error: error.message,
-        });
+            message: "Error updating post",
+            error: error.message
+        })
     }
-};
+}
 
 //GET
 export const getPostUser = async (req, res) => {
