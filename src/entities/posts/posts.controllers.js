@@ -81,56 +81,44 @@ export const deletePost = async (req, res) => {
 //UPDATE
 export const updatePostById = async (req, res) => {
     try {
-        const Role = req.tokenData.role
-        const userId = req.tokenData.id
-        const postId = req.params.id
-        const { description } = req.body
-
+        const userId = req.tokenData.id;
+        const userRole = req.tokenData.role;
+        const postId = req.params.id;
+        const { description } = req.body;
         if (!description) {
+            return res.status(400).json({
+                success: false,
+                message: "No post description found",
+            });
+        }
+        const post = await Post.findById(postId);
+        if (!post) {
             return res.status(404).json({
                 success: false,
-                message: "Enter the corresponding data",
-            })
+                message: "Post not found",
+            });
         }
-        if (Role !== "user") {
-            const postUpdated = await Post.findByIdAndUpdate({ _id: postId }, {
-                description: description,
-            })
-            if (!postUpdated) {
-                return res.status(404).json({
-                    success: false,
-                    Message: "Post not found",
-                })
-            }
-            return res.status(200).json({
-                success: true,
-                Message: "Post updated successfully",
-            })
-        }
-        const postUpdated = await Post.findOneAndUpdate({
-            _id: postId,
-            user: userId
-        }, {
-            description: description,
-        })
-        if (!postUpdated) {
-            return res.status(404).json({
+        if (post.userId.toString() !== userId && userRole !== "admin") {
+            return res.status(403).json({
                 success: false,
-                Message: "No post with that Id or is not your post",
-            })
+                message: "You are not authorized to update this post",
+            });
         }
+        post.description = description;
+        await post.save();
         return res.status(200).json({
             success: true,
             message: "Post updated successfully",
-        })
+            data: post
+        });
     } catch (error) {
         return res.status(500).json({
             success: false,
             message: "Error updating post",
             error: error.message
-        })
+        });
     }
-}
+};
 
 //GET
 export const getPostUser = async (req, res) => {
