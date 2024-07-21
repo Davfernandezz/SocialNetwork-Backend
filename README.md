@@ -1,8 +1,7 @@
 # SocialNetwork Backend🌐
 
 Welcome to my SocialNetwork Backend project, I hope you like it! 
-<a>
-<a>
+<br>
 <img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="900">
 </a>
 
@@ -25,7 +24,7 @@ Welcome to my SocialNetwork Backend project, I hope you like it!
 <br>
 
 ## Description📚
-This project consists of the development of a social network in which any user who does not have an account can register, log in and interact with other users through various options.
+This project consists of the development of a social network in which any user who does not have an account can register, log in and interact with other users through various options.<br>
 We will be able to upload publications where we will be able to comment our day, mood, anything you want to share with others and other users will be able to like your publication to let you know their opinion.
 We will have multiple options to view any content that is part of our application and to edit your profile or publications once created.
 
@@ -68,10 +67,8 @@ Used technology:
 </div>
 
 
-
-
 ## Database Schema📋
-
+<img width="1423" src="./img/DatabaseSchema.JPG">
 
 
 ## Local installation🧾
