@@ -1,15 +1,31 @@
-# SocialNetwork Backend
+# SocialNetwork Backend🌐
+
+Welcome to my SocialNetwork Backend project, I hope you like it! 📈
+<a>
+<img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="550">
+</a>
 
 <details>
   <summary>Table of Contents📝</summary>
   <ol>
-
+ <li><a href="#description">Description</a></li>
+    <li><a href="#objetive">Objetive</a></li>
+    <li><a href="#deploy-">Deploy</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#database-schema">Database Schema</a></li>
+    <li><a href="#local-installation">Local installation</a></li>
+    <li><a href="#endpoints">Endpoints</a></li>
+    <li><a href="#future-functionalities">Future functionalities</a></li>
+    <li><a href="#development">Development</a></li>
+    <li><a href="#appreciations">Appreciations</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 <br>
 
 ## Description📚
 
+## Objetive🎯
 
 ## Deploy 🚀
 <div align="center">
@@ -48,7 +64,7 @@ Used technology:
 
 
 
-## Diagram📋
+## Database Schema📋
 
 
 
