@@ -1,6 +1,6 @@
 # SocialNetwork Backend🌐
 
-Welcome to my SocialNetwork Backend project, I hope you like it! 
+Welcome to my SocialNetwork Backend project, I hope you like it! ✏️
 <br><br>
 <img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="900">
 </a>
@@ -15,7 +15,7 @@ Welcome to my SocialNetwork Backend project, I hope you like it!
     <li><a href="#database-schema">Database Schema</a></li>
     <li><a href="#local-installation">Local installation</a></li>
     <li><a href="#endpoints">Endpoints</a></li>
-    <li><a href="#future-functionalities">Future functionalities</a></li>
+    <li><a href="#future-functionalities️">Future functionalities</a></li>
     <li><a href="#development">Development</a></li>
     <li><a href="#appreciations">Appreciations</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -30,7 +30,8 @@ We will have multiple options to view any content that is part of our applicatio
 
 
 ## Objetive🎯
-
+The goal of this project is to adapt to the work that Javascript does with non-relational databases and to get better and better with Javascript, Mongo DB, Express JS and Node.<br>
+I have completed a list of endpoints and seeders, taking into account different roles with their respective permissions.
 
 ## Deploy 🚀
 <div align="center">
@@ -279,7 +280,9 @@ Used technology:
 
 
 ## Future functionalities⏭️
-
+- Users will be able to have followers.
+- The user will recover their timeline from the users they follow.
+- ...
 
 
 ## Development👨🏻‍💻
