@@ -30,7 +30,7 @@ We will have multiple options to view any content that is part of our applicatio
 
 
 ## Objetive🎯
-The goal of this project is to adapt to the work that Javascript does with non-relational databases and to get better and better with Javascript, Mongo DB, Express JS and Node.<br>
+The objetive of this project is to adapt to the work that Javascript does with non-relational databases and to get better and better with Javascript, Mongo DB, Express JS and Node.<br>
 I have completed a list of endpoints and seeders, taking into account different roles with their respective permissions.
 
 ## Deploy 🚀
@@ -54,9 +54,6 @@ Used technology:
     <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black" alt="js" />
 </a>
 <a>
-    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
-</a>
-<a>
 <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="docker" />
 </a>
 <a>
@@ -71,9 +68,10 @@ Used technology:
 ## Database Schema📋
 <img width="1423" src="./img/DatabaseSchema.JPG">
 
+    - "Users" to "Posts": One-to-many relationship where one users can have many posts.
 
 ## Local installation🧾
-1. Install docker and create a mongo DB container
+1. Install docker and create a Mongo DB container
 ``` docker run -d -p 27017:27017 --name mongo -v mongo_data:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root mongo:latest   ```
 2. Clone the repository
 3.  ``` $ npm install  ```
