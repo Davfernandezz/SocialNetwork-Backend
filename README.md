@@ -13,12 +13,15 @@
 
 ## Deploy 🚀
 <div align="center">
-    <a href=""><strong> Click here! </strong></a>🚀🚀🚀
+    <a href="https://socialnetwork-backend.zeabur.app/"><strong> Click here! </strong></a>🚀🚀🚀
 </div>
 
 ## Stack📒
 Used technology:
 <div align="center">
+<a>
+    <img src= "https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongo" />
+</a>
 <a>
     <img src= "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" alt="express" />
 </a>
@@ -50,6 +53,14 @@ Used technology:
 
 
 ## Local installation🧾
+1. Install docker and create a mongo DB container
+``` docker run -d -p 27017:27017 --name mongo -v mongo_data:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root mongo:latest   ```
+2. Clone the repository
+3.  ``` $ npm install  ```
+4. We connect our repository with the database
+5. ``` $ npm run dev ``` 
+6. ``` $ We run the seeders $ npm run db:seed ``` 
+7. ...
 
 
 ## Endpoints🧩
