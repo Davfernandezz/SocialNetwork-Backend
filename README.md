@@ -1,7 +1,7 @@
 # SocialNetwork Backend🌐
 
 Welcome to my SocialNetwork Backend project, I hope you like it! 
-<br>
+<br><br>
 <img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="900">
 </a>
 
@@ -83,7 +83,199 @@ Used technology:
 
 
 ## Endpoints🧩
+<details>
+<summary>Authentication🔑</summary>
 
+- **Register user**
+
+          POST http://localhost:5000/api/auth/register
+
+    body:
+
+    ```js
+        {
+            "email": "david@david.com",
+            "password": "123456789"
+        }
+    ```
+
+<br>
+
+- **Login user**	
+
+          POST http://localhost:5000/api/auth/login
+
+    body:
+
+    ```js
+        {
+            "email": "david@david.com",
+            "password": "123456789"
+        }
+    ```
+</details>
+<details>
+<summary>Users🧑🏻</summary>
+
+- **View all users** (IS ADMIN)
+
+          GET http://localhost:5000/api/users
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **View user profile**
+
+          GET http://localhost:5000/api/users/profile
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Update user profile**
+
+          PUT http://localhost:5000/api/users/profile
+
+    body:
+
+    ```js
+        {
+            "email": "nuno@nuno.com",
+            "password": "123498765"
+        }
+    ```
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+</details>
+<details>
+<summary>Posts🤳🏽</summary>
+
+- **Create post** 
+
+          POST http://localhost:5000/api/posts
+
+    body:
+
+    ```js
+        {
+            "description": "hello world"
+        }
+    ```
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Delete post**
+
+          DLETE http://localhost:5000/api/posts/:id
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Update post**
+
+          PUT http://localhost:5000/api/posts/:id
+
+    body:
+
+    ```js
+        {
+            "description": "update succesfully"
+        }
+    ```
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Get own posts**
+
+          GET http://localhost:5000/api/posts/own
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Get all posts**
+
+          GET http://localhost:5000/api/posts
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Get post by id**
+
+          GET http://localhost:5000/api/posts/:id
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+- **Get posts by a user** 
+
+          GET http://localhost:5000/api/posts/users/:id-user
+
+    auth:
+
+    ```js
+        auth token
+    ```
+
+<br>
+
+
+- **Like and unlike post**
+
+          PUT http://localhost:5000/api/posts/like/:id
+
+
+    auth:
+
+    ```js
+        auth token
+    ```
+</details>
 
 
 ## Future functionalities⏭️
