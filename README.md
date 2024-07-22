@@ -62,6 +62,9 @@ Used technology:
 <a>
     <img src="https://img.shields.io/badge/bcrypt-3178C6?style=for-the-badge&" alt="ts" />
 </a>
+<a>
+    <img src="https://img.shields.io/badge/-Mongoose-880000?style=for-the-badge&logo=node.js&logoColor=white" alt="ts" />
+</a>
 </div>
 
 
@@ -299,3 +302,4 @@ I would like to dedicate my thanks to the teachers at Geeks Hubs as well as my d
 ## Contact📲
 - **David Fernandez Valle**
   - [GitHub](https://github.com/Davfernandezz)
+  - [Linkedin](https://www.linkedin.com/in/david-fernandez-364702256/?originalSubdomain=es)

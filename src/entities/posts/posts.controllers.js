@@ -49,34 +49,37 @@ export const createPost = async (req, res) => {
 //DELETE
 export const deletePost = async (req, res) => {
     try {
-        const postId = req.params.id
-        const idToDeleteValid = Types.ObjectId.isValid(postId)
-
-        if (!idToDeleteValid) {
-            return res.status(400).json({
-                success: false,
-                message: "Id not valid"
-            })
-        }
-        const deletedPost = await Post.findByIdAndDelete(postId)
-        if (!deletedPost) {
-            return res.status(404).json({
-                succes: false,
-                message: "Not Post found"
-            })
-        }
-        res.status(200).json({
-            success: true,
-            message: "Post deleted",
-        })
-    } catch (error) {
-        return res.status(500).json({
+        const userId = req.tokenData.id;
+        const userRole = req.tokenData.role;
+        const postIdToDelete = req.params.id;
+        const postIdToDeleteIsValid = Types.ObjectId.isValid(postIdToDelete);
+        if (!postIdToDeleteIsValid) {
+          return res.status(400).json({
             success: false,
-            message: "Error deleting post",
-            error: error.message
-        })
-    }
-};
+            message: "Id not valid",
+          });
+        }
+        const post = await Post.findById(postIdToDelete);
+        if (post.userId.toString() !== userId && userRole !== "admin") {
+          return res.status(403).json({
+            success: false,
+            message: "You are not authorized to delete this post",
+          });
+        }
+        await Post.findByIdAndDelete(postIdToDelete);
+        res.status(200).json({
+          success: true,
+          message: "Post deleted",
+        });
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: "Error deleting post",
+          error: error.message,
+        });
+      }
+    };
+    
 
 //UPDATE
 export const updatePostById = async (req, res) => {
