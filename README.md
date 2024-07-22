@@ -302,4 +302,4 @@ I would like to dedicate my thanks to the teachers at Geeks Hubs as well as my d
 ## Contact📲
 - **David Fernandez Valle**
   - [GitHub](https://github.com/Davfernandezz)
-  - [Linkedin](https://www.linkedin.com/in/david-fernandez-364702256/?originalSubdomain=es)
+  - [Linkedin](https://www.linkedin.com/in/david-fern%C3%A1ndez-valle-1b4461300/?originalSubdomain=es)
