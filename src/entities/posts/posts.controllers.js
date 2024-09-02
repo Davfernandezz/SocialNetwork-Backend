@@ -123,6 +123,48 @@ export const updatePostById = async (req, res) => {
     }
 };
 
+//UPDATE
+export const updateMyPostById = async (req, res) => {
+    try {
+        const userId = req.tokenData.id;
+        const postId = req.params.id; 
+        const { description } = req.body; 
+        if (!description) {
+            return res.status(400).json({
+                success: false,
+                message: "No post description found",
+            });
+        }
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: "Post not found",
+            });
+        }
+        if (post.userId.toString() !== userId) {
+            return res.status(403).json({
+                success: false,
+                message: "You are not authorized to update this post",
+            });
+        }
+        post.description = description;
+        await post.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Post updated successfully",
+            data: post
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error updating post",
+            error: error.message
+        });
+    }
+};
+
 //GET
 export const getPostUser = async (req, res) => {
     try {
@@ -147,36 +189,39 @@ export const getPostUser = async (req, res) => {
 //GET
 export const getAllPost = async (req, res) => {
     try {
-        const posts = await Post.find({}, 'description like');
+        const posts = await Post.find({})
+            .select('description like userId')
+            .populate('userId', 'email');
+
         res.status(200).json({
             success: true,
-            message: 'Posts retrived successfully',
+            message: 'Posts retrieved successfully',
             data: posts,
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Error retrievening all posts',
+            message: 'Error retrieving all posts',
             error: error.message
         });
     }
 };
 
 //GET
-export const getPostdById = async (req, res) => {
+export const getPostById = async (req, res) => {
     try {
         const postId = req.params.id;
-        const post = await Post.findOne(
-            {
-                _id: postId
-            }
-        )
+        const post = await Post.findById(postId)
+            .select('description like userId')
+            .populate('userId', 'email');
+
         if (!post) {
             return res.status(404).json({
                 success: false,
                 message: "Post not found",
             });
         }
+
         res.status(200).json({
             success: true,
             message: "Post retrieved successfully",
@@ -221,45 +266,35 @@ export const putLikeById = async (req, res) => {
     try {
         const postId = req.params.id
         const userId = req.tokenData.id
-        const post = await Post.findById(postId)
+        let post = await Post.findById(postId)
         if (!post) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "Like post not found"
-                }
-            )
-        }
-        if (!post.like.includes(userId)) {
-            post.like.push(userId)
-            await post.save()
-            return res.json({
-                success: true,
-                message: "Like added",
+            return res.status(404).json({
+                success: false,
+                message: "Post not found"
             })
         }
-        await Post.findByIdAndUpdate(
-            postId,
-            {
-                $pull: {
-                    like: userId
-                }
-            },
-            {
-                new: true
-            }
-        )
+        const userLiked = post.like.indexOf(userId)
+        let message = ""
+        if (userLiked === -1) {
+            post.like.push(userId)
+            message = "Like added"
+        } else {
+            post.like.splice(userLiked, 1)
+            message = "Like removed"
+        }
+        await post.save()
         res.json({
             success: true,
-            message: "Like removed",
+            message: message,
+            data: {
+                like: post.like
+            }
         })
     } catch (error) {
-        res.status(500).json(
-            {
-                succes: false,
-                message: "Error adding like to the post",
-                error: error.message
-            }
-        )
+        res.status(500).json({
+            success: false,
+            message: "Error updating like on the post",
+            error: error.message
+        })
     }
 }

@@ -1,9 +1,13 @@
 import express from 'express';
+import cors from 'cors'
 import 'dotenv/config'
 import { dbConnection } from './database/db.js';
 import router from './router.js';
 
 const app = express();
+
+//CORS
+app.use(cors())
 
 app.use(express.json())
 
